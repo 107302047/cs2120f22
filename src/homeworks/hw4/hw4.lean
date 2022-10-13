@@ -13,7 +13,7 @@ answer.
 -/
 
 def and_associative : Prop := 
-  _
+  ∀ (P Q R: Prop), P ∧ (Q ∧ R) ↔ (P ∧ Q) ∧ R
 
 
 /- #1B [10 points]
@@ -25,6 +25,19 @@ that you use in your reasoning.
 
 /-
 Answer: 
+Split it into two cases P ∧ (Q ∧ R) → (P ∧ Q) ∧ R and (P ∧ Q) ∧ R → P ∧ (Q ∧ R).
+Start by proving P ∧ (Q ∧ R) → (P ∧ Q) ∧ R. Apply and_elimination_left to P ∧ (Q ∧ R)
+to get a proof of P. Apply and_elimination_right to P ∧ (Q ∧ R) to get a proof of Q ∧ R
+Apply and_elimination_left to Q ∧ R and get a proof of Q. Apply and_elimination_right 
+to Q ∧ R and get a proof of R. Apply and_introduction to P Q to get a proof of (P ∧ Q). 
+Apply and_introduction to (P ∧ Q) and R to get a proof of (P ∧ Q) ∧ R.
+
+Then continue by proving (P ∧ Q) ∧ R → P ∧ (Q ∧ R). Apply and_elimination_right to
+(P ∧ Q) ∧ R to get a proof of R. Apply and_elimination_left to (P ∧ Q) ∧ R to get a proof 
+of (P ∧ Q). Apply and_elimination_left to (P ∧ Q) to get a proof of P. Apply 
+and_elimination_right to (P ∧ Q) to get a proof of Q. Apply and_introduction to Q R to get
+a proof of (Q ∧ R). Apply and_introduction to P and (Q ∧ R) to get a proof of P ∧ (Q ∧ R).
+
 -/
 
 /- #1C [5 points]
@@ -35,6 +48,20 @@ Hint: unfold and_associative to start.
 
 theorem and_assoc_true : and_associative :=
 begin
+unfold and_associative,
+assume P Q R,
+split,
+assume h,
+let p := h.left,
+let q := h.right.left,
+let r := h.right.right,
+let pq := and.intro p q,
+apply and.intro pq r,
+intros h2,
+let p := h2.left.left,
+let q := h2.left.right,
+let r := h2.right,
+exact and.intro p(and.intro q r),
 end
 
 
@@ -46,7 +73,7 @@ analogous to the proposition about ∧ in #1.
 -/
 
 def or_associative : Prop := 
-  _
+  ∀ (P Q R: Prop), P ∨ (Q ∨ R) ↔ (P ∨ Q) ∨ R
 
 
 /- #2B [10 points]
@@ -54,6 +81,12 @@ def or_associative : Prop :=
 Write an English language proof of it, citing
 the specific inference rules you use in your
 reasoning.
+-/
+
+/-
+Answer:
+Split it into two cases P ∨ (Q ∨ R) → (P ∨ Q) ∨ R and (P ∨ Q) ∨ R → P ∨ (Q ∨ R).
+Start by proving P ∨ (Q ∨ R) → (P ∨ Q) ∨ R. 
 -/
 
 
@@ -64,6 +97,31 @@ Complete the following formal proof.
 
 theorem or_associative_true : or_associative :=
 begin
+unfold or_associative,
+intros P Q R,
+split,
+intros h,
+cases h,
+apply or.intro_left,
+apply or.intro_left,
+exact h,
+cases h,
+apply or.intro_left,
+apply or.intro_right,
+exact h,
+apply or.intro_right,
+exact h,
+intros h,
+cases h,
+cases h,
+apply or.intro_left,
+exact h,
+apply or.intro_right,
+apply or.intro_left,
+exact h,
+apply or.intro_right,
+apply or.intro_right,
+exact h,
 end
 
 
@@ -72,7 +130,7 @@ Write a formal statement of the proposition.
 -/
 
 def arrow_transitive : Prop :=
-  _
+  ∀ (X Y Z: Prop), (X → Y) → (Y → Z) → X → Z
 
 
 /- #3B [10 points]
@@ -93,6 +151,13 @@ yourself a proof of its conclusion.
 Write a formal proof of it.
 -/
 
+theorem arrow_transitive_true : arrow_transitive :=
+begin
+unfold arrow_transitive,
+assume X Y Z XY YZ x,
+exact YZ(XY x),
+end
+
 
 /- #4
 Suppose that if it's raining then the streets
@@ -108,7 +173,7 @@ logic by completing the following answer.
 
 def contrapositive : Prop :=
   ∀ (Raining Wet : Prop), 
-    (Raining → Wet) → (¬Raining → ¬Wet)
+    (Raining → Wet) → (¬Wet → ¬Raining)
 
 
 /- #4B [10 points]. 
@@ -116,6 +181,13 @@ def contrapositive : Prop :=
 
 theorem contrapositive_valid : contrapositive :=
 begin
+unfold contrapositive,
+intros Raining Wet h nwet nr,
+let w := h nr,
+exact nwet w,
+-- contradiction
+end
+
 
 /- #4C [5 points]. 
 

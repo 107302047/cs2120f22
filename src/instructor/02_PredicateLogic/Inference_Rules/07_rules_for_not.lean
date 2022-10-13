@@ -198,6 +198,7 @@ cases em_P,
 assumption,
 -- case ¬P
 contradiction,
+-- apply false.elim (nnp np),
 end
 
 /-
