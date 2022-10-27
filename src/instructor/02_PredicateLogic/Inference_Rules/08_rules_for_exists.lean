@@ -154,6 +154,17 @@ different values or combinations of argument values.
 
 def my_bool_and : bool → bool → bool 
 | tt tt := tt
+| tt ff := ff
+| ff tt := ff
+| ff ff := ff
+
+def my_bool_or : bool → bool → bool 
+| ff ff := ff
+| _ _ := ff -- all other cases
+
+def my_bool_not : bool → bool 
+| ff := tt
+| tt := ff
 
 /-
 Functions in Lean must be "total," which means that
@@ -167,6 +178,11 @@ function!
 #eval my_bool_and tt ff
 #eval my_bool_and ff tt
 #eval my_bool_and ff ff
+
+example : my_bool_and tt tt = tt := rfl
+example : my_bool_and tt ff = ff := rfl
+example : my_bool_and ff tt = ff := rfl
+example : my_bool_and ff ff = ff := rfl
 
 
 /-
@@ -183,7 +199,7 @@ def factorial' (n : ℕ) : ℕ :=
 
 def factorial : ℕ → ℕ           -- remember, no := here
 | 0 := 1
-| (n + 1) := (n + 1) * factorial n
+| (n' + 1) := (n' + 1) * factorial n'
 
 #eval factorial 5
 
