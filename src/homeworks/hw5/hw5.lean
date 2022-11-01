@@ -24,7 +24,8 @@ State and prove the proposition that there's some
 natural number whose square is 144.
 -/
 
-example : _ := _
+example : ∃ (n : ℕ), (n*n) - 144 = 0 := 
+   exists.intro 12 rfl
 
 
 /- #1B.
@@ -35,7 +36,8 @@ for string.append, the function for gluing two
 strings together into one.
 -/
 
-example : _ := _
+example : ∃ (s : string), s++"!" = "I love logic!":=  
+  exists.intro "I love logic" rfl
 
 /- #1C.
 
@@ -46,7 +48,7 @@ takes just one witness as a time, so you will
 have to apply it more than once.
 -/
 
-example : _ :=
+example : ∃ (x y z : ℕ), x*x + y*y = z*z :=
 begin
 end
 
