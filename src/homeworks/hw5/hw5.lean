@@ -58,7 +58,7 @@ three natural number arguments, x, y, and z,
 yielding the proposition that x*x + y*y = z*z.
 -/
 
-def pythag_triple (x y z : ℕ) := _
+def pythag_triple (x y z : ℕ) := x*x + y*y = z*z
 
 /- #1E
 State the propositionthat there exist x, y, z, 
@@ -66,9 +66,10 @@ natural numbers, that satisfy the pythag_triple,
 predicate, then prove it. (Use "example : ...")
 -/
 
-example : _  :=
+example : pythag_triple 3 4 5 :=
 begin
-_
+unfold pythag_triple,
+exact rfl,
 end
 
 /- #2A
@@ -170,7 +171,7 @@ be true or not. Try to prove it "mentally"
 to yourself first. 
 
 The key question here is, what does it even 
-mean for a  number, n, to be a multiple of 6. 
+mean for a number, n, to be a multiple of 6. 
 Well, n is a multiple of 6 if there's some 
 number, say k, such that n = k * 6, right? 
 
@@ -187,10 +188,10 @@ has to be. Also, be sure to use multiple_of in
 formally stating the proposition to be proved.
 -/
 
-example : _ :=
-begin
-_
-end 
+example : ∀ (n : ℕ), multiple_of n 6 → multiple_of n 3 :=
+begin 
+assume n,
+end
 
 
 /- #2C.
@@ -213,7 +214,7 @@ that you can replace equals by equals without
 changing the truth values of propositions. 
 -/
 
-example (n h k : ℕ) : _ :=
+example (n h k : ℕ) : multiple_of n h → multiple_of h k → multiple_of n k :=
 begin
 _
 end
@@ -239,7 +240,7 @@ example
   (isCool : Person → Prop)
   (LogicMakesCool : ∀ (p), KnowsLogic p → isCool p)
   (SomeoneKnowsLogic : ∃ (p), KnowsLogic p) :
-  _ :=
+  ∃(p), isCool p :=
 begin
 _
 end
@@ -254,10 +255,12 @@ someone is not happy then not everyone is happy.
 example 
   (Person : Type)
   (Happy : Person → Prop) :
-  _
+  (∃(p : Person), ¬(Happy p)) → ¬(∀(s : Person), Happy s)
   :=
 begin
-  _
+assume p,
+cases p with bill bill_not_happy,
+assume s,
 end
 
 /- #3C
