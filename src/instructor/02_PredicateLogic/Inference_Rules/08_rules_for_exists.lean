@@ -438,3 +438,19 @@ if you just dropped the condition, (∃ (x : X), P x)?
 The answer is no, but why? There's an edge case that
 the existence proof eliminates. What's the edge case? 
 -/
+
+
+example
+  (Person : Type)
+  (Loves : Person → Person → Prop)
+  :
+  (∃(p : Person), ∀(q : Person), Loves q p) → 
+  (∀(p : Person), ∃(q : Person), Loves p q)
+  :=
+begin
+  assume h,
+  cases h with lenny everyone_loves_lenny,
+  assume bruce,
+  apply exists.intro lenny _,
+  apply everyone_loves_lenny bruce,
+end
