@@ -302,9 +302,9 @@ taking objects of that type.
 example 
   (T : Type)
   (P : T → Prop) :
-  _ :=
+  ¬(∃(a : T), P a) → (∀(b : T), ¬P b) :=
 begin
-_
+assume h b,
 end
 
 
@@ -320,7 +320,7 @@ example
   (α : Type)
   (P : α → Prop)
   (Q : α → Prop): 
-  _ :=
+  (∃(a : α), P a ∨ Q a) → ((∃(b : α), P b) ∨ (∃(c : α), P c)) :=
 begin
 end
 
