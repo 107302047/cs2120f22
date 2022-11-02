@@ -50,6 +50,10 @@ have to apply it more than once.
 
 example : ∃ (x y z : ℕ), x*x + y*y = z*z :=
 begin
+apply exists.intro 3,
+apply exists.intro 4,
+apply exists.intro 5,
+exact rfl,
 end
 
 /- #1D
@@ -61,14 +65,17 @@ yielding the proposition that x*x + y*y = z*z.
 def pythag_triple (x y z : ℕ) := x*x + y*y = z*z
 
 /- #1E
-State the propositionthat there exist x, y, z, 
+State the proposition that there exist x, y, z, 
 natural numbers, that satisfy the pythag_triple, 
 predicate, then prove it. (Use "example : ...")
 -/
 
-example : pythag_triple 3 4 5 :=
+example : ∃(x y z : ℕ), pythag_triple x y z :=
 begin
 unfold pythag_triple,
+apply exists.intro 3,
+apply exists.intro 4,
+apply exists.intro 5,
 exact rfl,
 end
 
@@ -190,7 +197,13 @@ formally stating the proposition to be proved.
 
 example : ∀ (n : ℕ), multiple_of n 6 → multiple_of n 3 :=
 begin 
-assume n,
+assume n a,
+unfold multiple_of at a,
+cases a with k c,
+unfold multiple_of,
+apply exists.intro (2 * k),
+ring,
+exact c,
 end
 
 
