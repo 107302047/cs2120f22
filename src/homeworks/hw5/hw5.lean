@@ -89,7 +89,7 @@ n to be a multiple of m? There has to be some
 other number involved, right?
 -/
 
-def multiple_of (n m : ℕ) := ∃ (k), n = m * k  
+def multiple_of (n m : ℕ) := ∃ (w), n = m * w  
 
 /- #2B
 
@@ -199,9 +199,9 @@ example : ∀ (n : ℕ), multiple_of n 6 → multiple_of n 3 :=
 begin 
 assume n a,
 unfold multiple_of at a,
-cases a with k c,
+cases a with w c,
 unfold multiple_of,
-apply exists.intro (2 * k),
+apply exists.intro (2 * w),
 ring,
 exact c,
 end
@@ -229,7 +229,14 @@ changing the truth values of propositions.
 
 example (n h k : ℕ) : multiple_of n h → multiple_of h k → multiple_of n k :=
 begin
-_
+unfold multiple_of,
+assume a b,
+cases a with w1 a,
+cases b with w2 b,
+apply exists.intro (w1 * w2),
+rw a,
+rw b,
+ring,
 end
 
 
@@ -255,7 +262,9 @@ example
   (SomeoneKnowsLogic : ∃ (p), KnowsLogic p) :
   ∃(p), isCool p :=
 begin
-_
+cases SomeoneKnowsLogic with person person_know_logic,
+apply exists.intro person,
+apply LogicMakesCool person person_know_logic,
 end
 
 
@@ -272,8 +281,10 @@ example
   :=
 begin
 assume p,
-cases p with bill bill_not_happy,
+cases p with person person_not_happy,
 assume s,
+let s1 := s person,
+contradiction,
 end
 
 /- #3C
@@ -294,10 +305,20 @@ clear that there's a contradiction in
 your set of assumptions. 
 -/
 example 
-  (α : Type)
-  (P : α → Prop) :
-  _ :=
+  (Person : Type)
+  (happy : Person → Prop) :
+  (∀(p : Person), happy p) ↔ (¬(∃(q : Person), ¬happy q)) :=
 begin
+split,
+assume p1 q1,
+cases q1 with person unhappy_person,
+let happy_person := p1 person,
+contradiction,
+assume q1 person,
+cases (classical.em (happy person)),
+exact h,
+let nhp := q1 (exists.intro person h),
+contradiction,
 end 
 
 
@@ -321,7 +342,7 @@ assume h b,
 end
 
 
-/- #3D
+/- #3E
 Formally state and prove the proposition
 that if there's an object with the property 
 of having property P or property Q then 
