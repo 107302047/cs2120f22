@@ -14,6 +14,7 @@ is equal to the square of the first element, n, where square
 in turn is defined as so:
 -/
 
+
 def square (n : ℕ) := n * n
 
 /-

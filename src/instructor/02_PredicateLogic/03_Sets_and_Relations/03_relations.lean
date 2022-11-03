@@ -33,6 +33,7 @@ and so are not in the relation that it
 specifies. 
 -/
 
+
 /-
 
 Note that unlike with the Boolean
@@ -135,5 +136,11 @@ example : squares 1 1 := rfl
 example : squares 2 3 := rfl    -- no can, dude
 example : squares 2 4 := rfl
 example : squares 25 625 := rfl
+
+def string_to_nat : string → ℕ → Prop := λ s n, s.length = n
+
+example : string_to_nat "lean!" 5 :=
+begin
+end
 
 
