@@ -338,7 +338,9 @@ example
   (P : T → Prop) :
   ¬(∃(a : T), P a) → (∀(b : T), ¬P b) :=
 begin
-assume h b,
+assume h t pt,
+let x := h (exists.intro t pt),
+exact x,
 end
 
 
@@ -354,7 +356,14 @@ example
   (α : Type)
   (P : α → Prop)
   (Q : α → Prop): 
-  (∃(a : α), P a ∨ Q a) → ((∃(b : α), P b) ∨ (∃(c : α), P c)) :=
+  (∃(a : α), P a ∨ Q a) → ((∃(b : α), P b) ∨ (∃(c : α), Q c)) :=
 begin
+assume pa_or_qa,
+cases pa_or_qa with a pa_or_qa,
+cases pa_or_qa,
+apply or.intro_left,
+apply exists.intro a pa_or_qa,
+apply or.intro_right,
+apply exists.intro a pa_or_qa,
 end
 
