@@ -138,16 +138,16 @@ Quiz questions.
 
 Suppose you know that (X → Z) and (Y → Z) are true and you 
 want to prove Z. To be able to prove Z it will *suffice* to 
-prove ______; for then you will need only to apply the ______
+prove _X ∨ Y_ ; for then you will need only to apply the _or elimination_
 rule to deduce that Z is true.
 
 Suppose you know that (X → Z), (Y → Z), and Z are all true.
 Is it necessarily that case that (X ∨ Y) is also true? Defend
-you answer.
+you answer. 
 
 Suppose it's raining OR the sprinkler is running, and that in
 either case the grass is wet. Is the grass wet? How would you
-prove it?
+prove it? Or elimination
 -/
 
 
@@ -370,12 +370,16 @@ First-order logic. I know that every natural number is
 beautiful (∀ n, NaturalNumber(n) → Beautiful(n) : true), 
 and I want to prove (7 is beautiful : true). Prove it.
 Name the inference rule and identify the arguments you
-give it to prove it.
+give it to prove it. 
 
 Constructive logic. Suppose I have a proof, pf, that every 
 natural number is beautiful (∀ (n : ℕ), beautiful n), and I 
 need a proof that 7 is beautiful. How can I get the proof 
 I need? Answer in both English and with a Lean expression.
+
+variable beautiful: ℕ  → Prop
+variable t1: ∀ (n:ℕ ), beautiful n
+#check t1 7
 
 Formalize this story: All people are mortal, and Plato 
 is a person, therefore Plato is Mortal.

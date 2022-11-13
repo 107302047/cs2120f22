@@ -18,9 +18,11 @@ there is no such valid inference rule.
 
 If a ball, b, is round *and* b is also red, is b red?
 
-A: yes/no: 
+A: yes/no: Yes
 
 B: Why? 
+We can derived that b is red by applying and_elimination_right rule to b is round and red.
+
 
 
 #1B
@@ -29,59 +31,79 @@ If flowers make you happy and chocolates make you happy,
 and I give you flowers *or* I give you chocolates, will
 you be happy?
 
-A: yes/no: 
+A: yes/no: Yes.
 
-B: Why?
+B: Why? 
+If we know that I am given flowers or chocolate and either of them could make me happy, 
+we can apply or_elimoination rule to conclude that I am happy.
 
 
 #1C: If giraffes are just zebras in disguise, then the 
 moon is made of green cheese?
 
-A. yes/: 
+A. yes/: No.
 
 B. Why?
+There is no clear relationship between two statements 
+that we could'nt come up with an inference rule to apply. 
 
 
 #1D. If x = y implies that 0 = 1, then is it true that
 x ≠ y?
 
-A. yes/no: 
+A. yes/no: Yes. 
 
-B. Why?
+B. Why? 
+If we have a proof of x = y, we can derived a proof of 0 = 1. 
+However we couln't find a proof 0 = 1 which indecates that
+there's no proof of x = y which means x ≠ y.
 
 
 
 #1E. If every zebra has stripes and Zoe is a Zebra then
 Zoe has stripes.
 
-A. yes/no: 
+A. yes/no: Yes.
 
 B. Why?
+By applying ∀ elimination rule. If being any zebra z implies 
+z has stripes and Zoe is a particular zebra which implies Zoe 
+has stripes. 
 
 
 #1F. If Z could be *any* Zebra and Z has stripes, then 
 *every* Zebra has stripes.
 
-A. Yes/no: 
+A. Yes/no: Yes.
 
 B: Why?
+By arrow_forall_equivalent rule, if Z being a zebra
+implies that Z has stripes, it impies that for all the
+Z if Z happen to be a zebra, Z has stripes.
+
 
 
 #1G. If whenever the wind blows, the leaves move, and 
 the leaves are moving, then the wind is blowing.
 
-A. yes/no: 
+A. yes/no: No.
 
 B. Why? 
+The wind blows implies that the leaves are moving doesn't 
+necessary means that the leaves moving implies that the 
+wind blows.
 
 
 #1H: If Gina is nice *or* Gina is tall, and Gina is nice,
 then Gina is not tall. (The "or" here is understood to be
 the or of predicate logic.)
 
-A. yes/no: 
+A. yes/no: No.
 
-B. Why?
+B. Why? 
+If Gina is tall and nice, Gina is tall or Gina is nice would 
+be true, Gina is nice would be true but Gina is not tall 
+would be false.
 -/
 
 
@@ -94,11 +116,14 @@ logic: X ∨ ¬Y.
 
 #2A: Is is satisfiable? If so, give a model (a binding of 
 the variables to values that makes the expressions true).
+Its satisfiable.
+(X:true, Y:true), (X:true, Y:False), (X:false, Y:false)
+
 
 
 #2B: Is it valid? Explain your answer. 
-
-
+It's not valid.
+X ∨ ¬Y would be false if X is false and Y is true.
 -/
 
 
@@ -113,7 +138,7 @@ true if and only if Q is true) then if P is true then Q is
 true.
 -/
 
-#check _
+#check ∀ (P Q:Prop), P ↔ Q → (P → Q) 
 
 
 
@@ -129,6 +154,10 @@ be ignored here.
 
 /-
 Answer:
+For all natural number n and m, if we have a proof 
+that n is smaller than m then we can derived a proof 
+that m minus n will be greater than 0
+
 -/
 
 -- B
@@ -136,7 +165,9 @@ Answer:
 #check ∃ (n : ℕ), ∀ (m : nat), m >= n
 
 /-
-Answer:
+Answer: 
+There exists natural number n that all the natural number
+m is bigger or equal to n.
 -/
 
 
@@ -147,6 +178,7 @@ variables (isEven: ℕ → Prop) (isOdd: ℕ → Prop)
 
 /-
 Answer:
+For all natural number n, n is even or odd. 
 -/
 
 
@@ -156,6 +188,7 @@ Answer:
 
 /-
 Answer:
+For all proposition P, P is true or false.
 -/
 
 
@@ -165,6 +198,7 @@ Answer:
 
 /-
 Answer:
+For all proposition P, P cannot the both true and false.
 -/
 
 
@@ -189,5 +223,11 @@ variable contagion :
   (hasVirus : Animal → Prop)
   (closeContact : Animal → Animal → Prop), 
   hasVirus a1 → closeContact a1 a2 → hasVirus a2
+
+/-
+For all animal a1 a2, if we have a proof that a1 has virus 
+and we also have a proof that a1 a2 have close contact then
+we can derived that a2 has virus.
+-/
 
 

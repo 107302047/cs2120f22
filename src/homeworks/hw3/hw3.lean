@@ -51,7 +51,10 @@ really think about what you're saying with each word in your proof.
 See how the English presents the "story" of the formal proof in more
 natural, human, terms.
 
-ANSWER HERE:
+ANSWER HERE: If evryone is mortal and if Socrates is a human then Socrates is mortal. 
+             If being any human P implies that P is mortal, Sorates is a particular 
+             human which implies that Socrates is mortal.
+             
 -/
 
 
@@ -71,23 +74,20 @@ To do so, uncomment the following block of expressions then fill
 in blanks to complete this task.
 -/
 
-/- Uncomment this block to answer the question
 variable Person : Type
-variable Likes : _        -- a predicate with two Person arguments
-variable Jealous : _      -- same thing here  
+variable Likes : Person → Person → Prop        -- a predicate with two Person arguments
+variable Jealous : Person → Person → Prop   -- same thing here  
 variable Triangle :       -- note definition extends to next line
-  ∀ (p1 p2 p3 : Person), _  
-variables ed hannah mel : _
-variable likes_ed_hannah : _
-variable likes_hannah_mel : _
+  ∀ (p1 p2 p3 : Person), Likes p1 p2 → Likes p2 p3 → Jealous p1 p3  
+variables ed hannah mel : Person
+variable likes_ed_hannah : Likes ed hannah
+variable likes_hannah_mel : Likes hannah mel
 -- Finally write and use #check to check an expression that proves that ed is 
 -- jealous of mel.
 -- To ANSWER, fill in the _ with your expression. 
 -- HINT "Apply" what you know.
--/
 
-#check _
-
+#check Triangle ed hannah mel
 
 /- #3: Proofing a propositions involving ∀ and ∨
 
@@ -97,6 +97,9 @@ the methods of inference we've covered: ∀ (P Q : Prop), P ∧ Q → Q ∨ P.
 Do read that proposition carefully, please. You don't need to write a
 long proof. Keep it concise. Identiy the inference rules you use.
 
+Answer: We can get a proof of Q by applying and_elimination_right 
+        with P ∧ Q and with that we can deduce a proof of Q ∨ P with 
+        or_introduction_left. 
 -/
 
 
@@ -112,7 +115,14 @@ You may (and probably should) break up your expression over several
 lines, using line breaks and indentation to make the answer readable.
 -/
 
-variable Person : Type
+-- variable Person : Type
 variable Knows : Person → Person → Prop
 def answer : Prop := 
-    _
+    ∀ (P U:Person),
+    ∃ (Q R:Person), 
+    Knows P Q → 
+    Knows Q R → 
+    Knows R U
+    
+
+
