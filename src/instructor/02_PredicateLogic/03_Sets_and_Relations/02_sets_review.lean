@@ -1,5 +1,5 @@
 /- Review: Sets as defined by membership predicates
-
+  
 Review: We specific a set of objects of some 
 type, α, as a predicate, p : α → Prop. Recall
 that p takes an argument, a, of type α, and 
