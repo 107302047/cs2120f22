@@ -402,6 +402,7 @@ def my_set_difference
   {S T : set α} 
   (a : α ):
   (a ∈ S ∧ a ∉ T) ↔ a ∈ S \ T :=
+  
 begin
 split,
 assume h,

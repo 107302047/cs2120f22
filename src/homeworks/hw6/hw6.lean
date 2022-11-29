@@ -181,26 +181,18 @@ using set and set operator notations.
 
 
 -- 1. intersection
-def f_in_x : 4 ∈ X :=
-begin
-unfold X,
-right,
-right,
-exact rfl,
-end
-
-def f_in_y : 4 ∈ Y :=
-begin
-unfold Y,
-left,
-exact rfl,
-end
-
 example : 4 ∈ X ∩ Y :=
 begin
 unfold X Y,
-let v := and.intro f_in_x f_in_y,
+let n : 4 ∈ {2, 3, 4} := _,
+let p : 4 ∈ {4, 5, 6} := _,
+let v := and.intro n p,
 exact v,
+left,
+exact rfl,
+right,
+right,
+exact rfl,
 end
 
 -- 2. union
@@ -233,16 +225,26 @@ goal and proceed accordingly.
 -/
 
 -- 3. difference
-example : _ :=
+example : 4 ∉ X \ Y :=
 begin
-_
+assume a,
+cases a,
+let p : 4 ∈ {4, 5, 6} := _,
+contradiction,
+left,
+exact rfl,
 end
 
 
 -- 4. complement
-example : _ :=
+example : 10 ∈ Xᶜ:=
 begin
-_
+assume a,
+cases a,
+cases a,
+cases a,
+cases a,
+cases a,
 end 
 
 
@@ -271,7 +273,7 @@ in the rest!
 def single_valued   -- predicate on relations
 {α β : Type} 
 (r : α → β → Prop) 
-: Prop := _
+: Prop := ∀ (a : α) (b c : β), r a b → r a c → b = c
 
 /- Part #2 [5 points]
 
@@ -280,7 +282,7 @@ sq x y is satisfied iff y is the square of x.
 -/
 
 def sqrs : ℕ → ℕ → Prop 
-| x y := _
+| x y := x * x = y
 
 /- Part #3 [5 points] 
 
@@ -290,7 +292,12 @@ sqrs relation is single-valued.
 
 example : single_valued sqrs :=
 begin
-_
+unfold single_valued,
+assume a b c,
+unfold sqrs,
+assume baa caa,
+rw<-baa,
+rw<-caa,
 end
 
 
@@ -310,7 +317,8 @@ def injective
 (r : α → β → Prop)  -- any relation on α and β 
 (a b : α)           -- any two arbitrary α values
 (x : β) :           -- any β value
-Prop := _
+Prop := ∀ (a b : α) (c : β), function r → r a c → r b c → a = b
+
 
 
 /- C [10 points].
@@ -331,6 +339,9 @@ example :
       ∃ (b : β), 
         f a = b :=
 begin
-_
+assume α β f a,
+let b := f a,
+apply exists.intro b,
+exact rfl,
 end
 
