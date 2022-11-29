@@ -97,7 +97,7 @@ any function, f : α → α.
 -/
 
 def involutive {α : Sort u} (f : α → α) := 
-  _
+  ∀ (a : α), f(f a) = a
 
 /-
 Now prove the proposition that the Boolean negation 
@@ -108,6 +108,11 @@ Ask, how can I prove it? Hint: It's just a bool!
 
 example : involutive bnot :=
 begin
+unfold involutive bnot,
+assume a,
+cases a,
+exact rfl,
+exact rfl,
 end 
 
 
@@ -126,7 +131,7 @@ your answer. Remember: Predicates take values
 to propositions. 
 -/
 
-def perfectSquare (n : ℕ) : Prop := _
+def perfectSquare (n : ℕ) : Prop := ∃(a : ℕ), n = a * a
 
 
 /- B [5 points].
@@ -136,7 +141,7 @@ set comprehension (set builder) notation and
 the perfectSquare predicate.
 -/
 
-def perfectSquares : set ℕ := _
+def perfectSquares : set ℕ := { n : ℕ | perfectSquare n }
 
 
 /- C [5 point].
@@ -147,8 +152,10 @@ notation in writing your proposition.
 -/
 
 
-example : _ :=
+example : 25 ∈ perfectSquares :=
 begin
+apply exists.intro 5,
+exact rfl,
 end
 
 
@@ -174,14 +181,36 @@ using set and set operator notations.
 
 
 -- 1. intersection
-example : _ :=
+def f_in_x : 4 ∈ X :=
 begin
-_
+unfold X,
+right,
+right,
+exact rfl,
+end
+
+def f_in_y : 4 ∈ Y :=
+begin
+unfold Y,
+left,
+exact rfl,
+end
+
+example : 4 ∈ X ∩ Y :=
+begin
+unfold X Y,
+let v := and.intro f_in_x f_in_y,
+exact v,
 end
 
 -- 2. union
-example : _ :=
+example : 4 ∈ X ∪ Y :=
 begin
+unfold X Y,
+apply or.inl,
+right,
+right,
+exact rfl,
 end
 
 
