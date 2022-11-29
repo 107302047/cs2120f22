@@ -35,7 +35,11 @@ A: yes/no: Yes.
 
 B: Why? 
 If we know that I am given flowers or chocolate and either of them could make me happy, 
+<<<<<<< HEAD
 we can apply or_elimination rule to conclude that I am happy.
+=======
+we can apply or_elimoination rule to conclude that I am happy.
+>>>>>>> a0eb0546845ec83b144a4227ed6d0ec7a42cb5a1
 
 
 #1C: If giraffes are just zebras in disguise, then the 
