@@ -20,11 +20,9 @@ n > 0 (i.e., n = n' + 1 = (nat.succ n') for some n').
 -/
 
 -- Answer
-def isZero : ℕ → bool :=
-begin
-assume n,
-exact n = 0,
-end
+def isZero : ℕ → bool
+| 0 := true
+| _ := false
 
 
 -- These test cases should pass except the last 
