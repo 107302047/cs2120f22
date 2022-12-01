@@ -12,9 +12,14 @@ English language proof.
 
 example (α : Type) (P : α → Prop) : (∃ a, P a) → (¬(∀ x, ¬ P x)) :=
 begin
+-- assign a_has_p to ∃ (a : α), P a
+-- assign all_x_not_has_p : ∀ (x : α), ¬P x
 assume a_has_p all_x_not_has_p,
-cases a_has_p with a p_a,
+-- there exists a with type α and a proof of P a as p_a
+cases a_has_p with a p_a, 
+-- apply a to all_x_not_has_p that leads to ¬P a
 let v := all_x_not_has_p a,
+-- contradiction appears
 contradiction,
 end
 
@@ -57,7 +62,7 @@ explain why it's so.
 Answer here:
 a, b : ℕ 
 r a b : b = 2 * a
-It only holds when a = b = 0. If a ≠ b then either r a b or r b a must be false.
+It only holds when a = b = 0. If a ≠ b then either (r a b) or (r b a) must be false.
 -/
 
 
@@ -116,8 +121,15 @@ example
 ¬ ∃ (a : α), r a a :=
 begin
 -- proof by negation
+-- there exists a with type α that has relation r a a
 assume exist_raa,
 cases exist_raa with a raa,
+-- v is the proof that if there's proof of r a a there will be a proof of ¬r a a
+let v := h a a,
+-- there is a proof of r a a 
+let b := v raa,
+-- ¬r a a is contradict to r a a
+contradiction,
 end
 
 
@@ -131,6 +143,10 @@ that α is inhabited.
 example (α : Type) (a : α): ¬ is_asymmetric (@eq α) :=
 begin
 unfold is_asymmetric,
+assume p,
+let b := eq.refl a,
+let v := p a a b,
+contradiction,
 end
 
 /- Extra credit: What exactly goes wrong in a formal 
