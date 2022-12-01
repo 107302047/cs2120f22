@@ -178,6 +178,17 @@ have covered in class.
 
 example : ∀ m : ℕ, equivalence (equiv_mod_m m) :=
 begin
+unfold equivalence equiv_mod_m reflexive symmetric transitive,
+assume m,
+split,
+assume x,
+exact eq.refl (x % m),
+split,
+assume x y xmym,
+rw xmym,
+assume x y z xmym ymzm,
+rw xmym,
+rw ymzm,
 end
 
 
