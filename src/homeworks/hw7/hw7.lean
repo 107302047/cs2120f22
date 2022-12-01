@@ -12,6 +12,10 @@ English language proof.
 
 example (α : Type) (P : α → Prop) : (∃ a, P a) → (¬(∀ x, ¬ P x)) :=
 begin
+assume a_has_p all_x_not_has_p,
+cases a_has_p with a p_a,
+let v := all_x_not_has_p a,
+contradiction,
 end
 
 
@@ -34,10 +38,10 @@ answer yes/no then briefly justify your answer.
 
 ( domain = ℕ, r = {(0,0),(1,1),(2,2)}, co-domain=ℕ )
 
-A. Is this relation reflexive? 
-B. Is this relation symmetric? 
-C. Is this relation transitive? 
-D. Is this relation an equivalence relation? 
+A. Is this relation reflexive? Yes, every value is related to itself.
+B. Is this relation symmetric? Yes, the relation between two values can be inverted.
+C. Is this relation transitive? Yes, the relation relates a and b, b and c, a and c.
+D. Is this relation an equivalence relation? Yes, since it satisfied reflexive, symmetric and transitive.
 -/
 
 
@@ -49,7 +53,13 @@ if, for all values in its domain, a and b, if r a b
 and if r b a then a = b. Give an example of a familiar
 arithmetic relation that's anti-symmetric, and briefly
 explain why it's so.
+
+Answer here:
+a, b : ℕ 
+r a b : b = 2 * a
+It only holds when a = b = 0. If a ≠ b then either r a b or r b a must be false.
 -/
+
 
 
 /- #4
@@ -71,6 +81,9 @@ Name a familar arithmetic relation that's asymmetric
 and briefly explain why you think it's asymmetric.
 
 Answer here:
+r a b : b = a + 1
+r a b means b = a + 1, r b a means a = b + 1, if b = a + 1 is true
+a = b + 1 = a + 1 + 1 = a + 2, a ≠ a + 2 therefore r a b → ¬ r b a
 -/
 
 /- C: 
@@ -84,6 +97,8 @@ assume that r is asymmetric). Now assume r a a. <finish
 the proof>.
 
 Answer here (rest of proof): 
+r a a → ¬ r a a which lead to contradiction. If r is an asymmetric 
+relation the assumption r a a cannot be true.
 -/
 
 /- D.
@@ -101,7 +116,8 @@ example
 ¬ ∃ (a : α), r a a :=
 begin
 -- proof by negation
-
+assume exist_raa,
+cases exist_raa with a raa,
 end
 
 
@@ -114,6 +130,7 @@ that α is inhabited.
 
 example (α : Type) (a : α): ¬ is_asymmetric (@eq α) :=
 begin
+unfold is_asymmetric,
 end
 
 /- Extra credit: What exactly goes wrong in a formal 
