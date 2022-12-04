@@ -204,12 +204,13 @@ a very brief justification of each answer. Assume
 the domain is all living persons, and the co-domain
 is all natural numbers.
 
--- it's a function: 
--- it's total: 
--- it's injective (where "): 
--- it's surjective (where the co-domain is all ℕ):
--- it's strictly partial:  
--- it's bijective: 
+-- it's a function: Yes, every person could find one and only one taxpayer id number.
+-- it's total: Yes, every person could find one taxpayer id number.
+-- it's injective (where "): Yes, if two people has identical taxpayer id number, they must be the same person.
+-- it's surjective (where the co-domain is all ℕ): No, there were limited number of people but infinite number of ℕ. 
+                                                   Not all taxpayer id number correspond to a person.
+-- it's strictly partial: No, there's no one that could'nt find one coresponding taxpayer id number.  
+-- it's bijective: No its not surjective therfore its no bijective.
 -/
 
 
@@ -220,9 +221,11 @@ numbers. Which of the following properties does
 it have? Explain each answer enough to show you
 know why your answer is correct.
 
--- reflexive:
--- symmetric: 
--- transitive:
+-- reflexive: No r has no relation with any natural numbers
+-- symmetric: No, since it has no relation with any natural numbers,
+              there were no cases to prove it is symmetric.
+-- transitive: No, since it has no relation with any natural numbers,
+               there were no cases to prove it is transitive.
 -/
 
 
