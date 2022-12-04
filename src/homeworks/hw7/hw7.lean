@@ -280,9 +280,9 @@ S (of objects of some type), is a partial order.
 Pf:  
 Suppose S is a set, with a ⊆ S and b ⊆ S subsets. Then
 
-1. 
-2. 
-3. 
+1. a is a partial order which is reflexive, anti-symmetric and transitive.
+2. b is a partial order which is reflexive, anti-symmetric and transitive.
+3. Any subset ⊆ S would be a partial order.
 
 QED.
 -/
