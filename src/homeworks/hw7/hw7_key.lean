@@ -362,13 +362,11 @@ assume h,
 
 apply and.intro,
 assume k,
-let foo: (x ∈ a ∪ b) := 
-  begin left, assumption end,
+let foo: (x ∈ a ∪ b) := or.inl k,
 contradiction, 
 
 assume k,
-let foo: (x ∈ a ∪ b) := 
-  begin right, assumption end,
+let foo: (x ∈ a ∪ b) := or.inr k,
 contradiction,
 
 -- backwards
