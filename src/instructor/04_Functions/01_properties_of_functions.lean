@@ -1,4 +1,4 @@
-import logic.relation
+mimport logic.relation
 
 namespace cs2120
 
